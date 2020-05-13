@@ -1,0 +1,23 @@
+html
+    head
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+        script.
+            $(document).ready(function(){
+                $("#submit").click(function(){
+                    var user_id_val=$("#user_id").val()
+                    $.get("http://localhost:8080/getUserData",{userID:user_id_val},function(response,status){
+                        console.log(response+" "+status)
+                        $("#user_name").show()
+                        $("#user_name").text(response)
+                    })
+                })
+            })
+
+
+    body
+        div
+            h1 hello world!
+            input(type="number", name="user_id" id="user_id")
+            button(id="submit") Submit
+            br
+            p(id="user_name")
