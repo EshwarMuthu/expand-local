@@ -1,23 +1,76 @@
-html
+//- html
+//-     head
+//-         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+//-         script.
+//-             $(document).ready(function(){
+//-                 $("#submit").click(function(){
+//-                     var user_id_val=$("#user_id").val()
+//-                     $.get("http://localhost:8080/getUserData",{userID:user_id_val},function(response,status){
+//-                         console.log(response+" "+status)
+//-                         $("#user_name").show()
+//-                         $("#panel").show()
+//-                         $("#user_name").text(response)
+//-                     })
+//-                 })
+//-                 $("#savepref").click(function(){
+//-                     var databind={
+//-                         br:$("#br").val(),
+//-                         si:$("#si").val(),
+//-                         go:$("#go").val()
+//-                     }
+//-                     $.post("http://localhost:8080/save",databind,function(response,status){
+//-                         console.log("post resp "+response+" "+status)
+//-                     })
+//-                 })
+//-             })
+
+
+//-     body
+//-         div
+//-             h1 hello world!
+//-             input(type="number", name="user_id" id="user_id")
+//-             button(id="submit") Submit
+//-             br
+//-             p(id="user_name")
+//-         div(id="panel")
+//-             p select the category of badges to automatically share
+//-             label Bronze
+//-             select(id="br")
+//-                 option(value="true") include
+//-                 option(value="false") exclude
+//-             br
+//-             label Silver
+//-             select(id="si")
+//-                 option(value="true") include
+//-                 option(value="false") exclude
+//-             br
+//-             label Gold
+//-             select(id="go")
+//-                 option(value="true") include
+//-                 option(value="false") exclude
+//-             br
+//-             button(id="savepref") save preferences
+
+html(lang="en")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Expand-local
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
         script.
-            $(document).ready(function(){
-                $("#submit").click(function(){
-                    var user_id_val=$("#user_id").val()
-                    $.get("http://localhost:8080/getUserData",{userID:user_id_val},function(response,status){
+            $(document).ready(()=>{
+                $("#submit").click(()=>{
+                    var user_url=$("#urlval").val()
+                    $.get("http://localhost:8080/getUserData",{userURL:user_url},(response,status)=>{
                         console.log(response+" "+status)
-                        $("#user_name").show()
-                        $("#user_name").text(response)
+                        $("#panel").show()
+                        $("#name").text(response)
                     })
                 })
             })
-
-
     body
-        div
-            h1 hello world!
-            input(type="number", name="user_id" id="user_id")
-            button(id="submit") Submit
-            br
-            p(id="user_name")
+        h1 welcome
+        input(type="text" id="urlval")
+        button(id="submit") submit
+        div(id="panel" hidden)
+            p(id="name")
